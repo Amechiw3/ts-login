@@ -6,6 +6,6 @@ export class ApiController {
     }
 
     index(request: Request, response: Response) : Response {
-        return response.json('Welcome to my API')
+        return response.status(200).json('Welcome to my API')
     }
 }

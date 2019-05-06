@@ -1,9 +1,9 @@
 import { App } from './app';
-import { connect as database } from "./database";
 
-async function main() {
-    await database();
+async function bootstrap() {
     const app = new App();
+    await app.database();
     await app.listen();
 }
-main();
+
+bootstrap();
