@@ -1,14 +1,16 @@
-import express, { Application, Request, Response, NextFunction, json } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from "cors";
 import morgan from 'morgan';
 import methodOverride from "method-override";
 import errorHandler from "errorhandler";
+
 
 import { keys } from './keys';
 import { connect } from "./database";
 
 //Routes
 import ApiRoutes from './routes/api.routes';
+import HttpException from "./exceptions/HttpException";
 
 export class App {
     private app : Application;
@@ -35,19 +37,10 @@ export class App {
         this.app.use(methodOverride());
         this.app.use(morgan("dev"));
         this.app.use(express.urlencoded({ extended: false }));
-        this.app.use(json());
+        this.app.use(express.json());
 
         if (!this.isProduction) {
             this.app.use(errorHandler());
-        }
-
-        this.app.use(function(req: Request, res: Response, next: NextFunction) {
-            var err = new Error('Not Found');
-            //@ts-ignore
-            err.status = 404;
-            next(err);
-        });
-        if (!this.isProduction) {
             // development error handler
             // will print stacktrace
             this.app.use(function(err: { stack: any; status: any; message: any; }, req: Request, res: Response, next: NextFunction){

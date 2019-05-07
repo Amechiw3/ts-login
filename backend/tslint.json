@@ -1,0 +1,7 @@
+{
+    //"defaultSeverity": "error",
+    //"extends": "tslint:recommended",
+    //"jsRules": {},
+    "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
+    "rules": {}
+}
