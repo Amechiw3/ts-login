@@ -3,10 +3,10 @@ import cors from "cors";
 import morgan from 'morgan';
 import methodOverride from "method-override";
 import errorHandler from "errorhandler";
-
+import session from "express-session";
 
 import { keys } from './keys';
-import { connect } from "./database";
+import Mongo from "./database";
 
 //Routes
 import ApiRoutes from './routes/api.routes';
@@ -24,12 +24,21 @@ export class App {
         this.routes();
     }
 
-    async database() : Promise<void> {
-        await connect();
+    async database() : Promise<void>{
+        await Mongo.run()
     }
 
     private settings() {
         this.app.set('port', this.port || keys.PORT);
+        this.app.set("secret", keys.SECRET);
+        this.app.use(session({
+            secret: this.app.get("secret"),
+            cookie: {
+                maxAge: 60000
+            },
+            resave: false,
+            saveUninitialized: false
+        }));
     }
 
     private middlewares() {

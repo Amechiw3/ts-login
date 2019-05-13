@@ -27,7 +27,7 @@ export class UsersController {
         }
     }
 
-    public async add(request: Request, response: Response) : Promise<Response>{
+    public async add(request: Request, response: Response) : Promise<Response> {
         const newUser : Users = new UserSchema;
         newUser.username = request.body.username;
         newUser.email = request.body.email;

@@ -24,11 +24,11 @@ class HelpersUsers {
             email: data.email,
             token: this.generateJWT(data),
             bio: data.bio,
-            imagen: data.image
+            image: data.image
         }
     }
 
-    private generateJWT(data: any) {
+    public generateJWT(data: any) {
         const today = new Date();
         const exp = new Date(today);
         const secret = keys.SECRET || "ts-login";
