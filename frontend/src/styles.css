@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files
+height: 100%;
+html {
+  box-sizing: border-box;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*/
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
